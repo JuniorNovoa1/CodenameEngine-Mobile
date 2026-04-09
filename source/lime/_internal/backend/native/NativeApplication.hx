@@ -470,7 +470,7 @@ class NativeApplication
 
 	private function handleSensorEvent():Void
 	{
-		var sensor = Sensor.sensorByID.get(sensorEventInfo.id);
+		var sensor = Sensor.__sensorByID.get(sensorEventInfo.id);
 
 		if (sensor != null)
 		{
