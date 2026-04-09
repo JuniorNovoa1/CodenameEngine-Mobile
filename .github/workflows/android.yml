@@ -24,9 +24,19 @@ jobs:
           # not caching the bin folder to prevent asset duplication and stuff like that
           key: cache-build-android
           path: |
+            ~/.gradle
             .haxelib/
+            /home/runner/haxelib/
+            /Users/runner/haxelib/
+            C:/hostedtoolcache/windows/haxe/4.3.6/x64/lib/
+            ~/.haxelib/
             export/release/android/haxe/
             export/release/android/obj/
+            export/release/ios/${{ env.PROJECT_NAME }}/haxe/
+            export/release/ios/${{ env.PROJECT_NAME }}/obj/
+            export\release\windows\haxe\
+            export\release\windows\obj\
+            .haxelib\
           restore-keys: |
             cache-build-android
       - name: Installing/Updating libraries
@@ -42,7 +52,7 @@ jobs:
           haxelib run lime config ANDROID_SETUP true
       - name: Building the game
         run: |
-          haxelib run lime build android -final
+          haxelib run lime build android -final -ONLY_ARM64
       - name: Uploading artifact (entire build)
         uses: actions/upload-artifact@v4
         with:
@@ -73,8 +83,18 @@ jobs:
           # caching again since for some reason it doesnt work with the first post cache shit
           key: cache-build-android
           path: |
+            ~/.gradle
             .haxelib/
+            /home/runner/haxelib/
+            /Users/runner/haxelib/
+            C:/hostedtoolcache/windows/haxe/4.3.6/x64/lib/
+            ~/.haxelib/
             export/release/android/haxe/
             export/release/android/obj/
+            export/release/ios/${{ env.PROJECT_NAME }}/haxe/
+            export/release/ios/${{ env.PROJECT_NAME }}/obj/
+            export\release\windows\haxe\
+            export\release\windows\obj\
+            .haxelib\
           restore-keys: |
             cache-build-android
