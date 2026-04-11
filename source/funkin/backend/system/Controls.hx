@@ -388,11 +388,11 @@ class Controls extends FlxActionSet
 					return p;
 				case "_R":
 					var justR:Bool = (mobilePadJustReleased(keyMap) || hitboxJustReleased(keyMap));
-					trace('${p ? "just released" : "not just released"} the button $keyMap');
+					trace('${justR ? "just released" : "not just released"} the button $keyMap');
 					return justR;
 				default:
 					var justP:Bool = (mobilePadPressed(keyMap) || hitboxPressed(keyMap));
-					trace('${p ? "pressed" : "not pressed"} the button $keyMap');
+					trace('${justP ? "pressed" : "not pressed"} the button $keyMap');
 					return justP;
 			}
 			trace('nothing found: $type');
