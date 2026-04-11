@@ -40,11 +40,11 @@ class ControlsMacro
 		{
 			switch (field.kind)
 			{
-				case FProp(g, s, t, e):
-					var controlFields = handleControl(field, g, s, t, e);
-					for (field in controlFields)
-						if (field != null)
-							fields.push(field);
+				case FProp("get", "set", t, e):
+					var controlFields = handleControl(field, "get", "set", t, e);
+					for (newField in controlFields)
+						if (newField != null)
+							fields.push(newField);
 				default:
 			}
 		}
