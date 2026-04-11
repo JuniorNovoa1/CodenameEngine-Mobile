@@ -375,6 +375,7 @@ class Controls extends FlxActionSet
 		return ControlsUtil.getPressed(this, name);
 	}
 
+	@:nullSafety(Off)
 	public function checkMobile(buttonName:String, type:String):Bool
 	{
 		var keyMap:Array<String> = [buttonName.toUpperCase()];
@@ -391,11 +392,19 @@ class Controls extends FlxActionSet
 		return false;
 	}
 	
+	@:nullSafety(Off)
 	public var isInSubstate:Bool = false; // don't worry about this it becomes true and false on it's own in MusicBeatSubstate
+
+	@:nullSafety(Off)
 	public var requestedInstance(get, default):Dynamic; // is set to MusicBeatState or MusicBeatSubstate when the constructor is called
-	public var requestedHitbox(get, default):FunkinHitbox; // for PlayState and EditorPlayState
+
+	@:nullSafety(Off)
+	public var requestedHitbox(get, default):FunkinHitbox; // for PlayState
+
+	@:nullSafety(Off)
 	public var mobileC(get, never):Bool;
 
+	@:nullSafety(Off)
 	private function mobilePadPressed(keys:Array<String>):Bool
 	{
 		if (keys != null && requestedInstance.mobileManager.mobilePad != null)
@@ -405,6 +414,7 @@ class Controls extends FlxActionSet
 		return false;
 	}
 
+	@:nullSafety(Off)
 	private function mobilePadJustPressed(keys:Array<String>):Bool
 	{
 		if (keys != null && requestedInstance.mobileManager.mobilePad != null)
@@ -414,6 +424,7 @@ class Controls extends FlxActionSet
 		return false;
 	}
 
+	@:nullSafety(Off)
 	private function mobilePadJustReleased(keys:Array<String>):Bool
 	{
 		if (keys != null && requestedInstance.mobileManager.mobilePad != null)
@@ -423,6 +434,7 @@ class Controls extends FlxActionSet
 		return false;
 	}
 
+	@:nullSafety(Off)
 	private function hitboxPressed(keys:Array<String>):Bool
 	{
 		if (keys != null && requestedHitbox != null)
@@ -432,6 +444,7 @@ class Controls extends FlxActionSet
 		return false;
 	}
 
+	@:nullSafety(Off)
 	private function hitboxJustPressed(keys:Array<String>):Bool
 	{
 		if (keys != null && requestedHitbox != null)
@@ -441,6 +454,7 @@ class Controls extends FlxActionSet
 		return false;
 	}
 
+	@:nullSafety(Off)
 	private function hitboxJustReleased(keys:Array<String>):Bool
 	{
 		if (keys != null && requestedHitbox != null)

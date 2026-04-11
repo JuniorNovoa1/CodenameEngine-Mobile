@@ -20,6 +20,13 @@ class ControlsMacro
 	static var _keySet: Map<String, String> = null;
 	static var _internalMap: Map<String, String> = null;
 
+	var ignoredFields = [
+		"mobileC", 
+		"isInSubstate", 
+		"requestedHitbox", 
+		"requestedInstance",
+	];
+
 	public static macro function build(): Array<Field>
 	{
 		var fields = Context.getBuildFields();
@@ -38,10 +45,12 @@ class ControlsMacro
 		var fields = Context.getBuildFields();
 		for (field in fields.copy())
 		{
+			if (ignoredFields.contains(field.name)) continue;
+
 			switch (field.kind)
 			{
-				case FProp("get", "set", t, e):
-					var controlFields = handleControl(field, "get", "set", t, e);
+				case FProp(g, s, t, e):
+					var controlFields = handleControl(field, g, s, t, e);
 					for (newField in controlFields)
 						if (newField != null)
 							fields.push(newField);
