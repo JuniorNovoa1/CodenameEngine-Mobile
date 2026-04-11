@@ -75,11 +75,7 @@ class Main extends Sprite
 		MobileUtil.getPermissions();
 		#end
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(MobileUtil.getDirectory()));
-
-		/* Core Folders */
-		MobileUtil.copyAssets("assets/languages/");
-		MobileUtil.copyAssets("assets/data/");
-		MobileUtil.copyAssets("assets/songs/");
+		MobileUtil.copyAssets(["assets/languages/", "assets/data/", "assets/songs/"]);
 		#end
 
 		CrashHandler.init();

@@ -897,8 +897,8 @@ class PlayState extends MusicBeatState
 		addHitboxCamera();
 		addMobilePad('NONE', 'P');
 		addMobilePadCamera();
-		hitbox.visible = true;
-		hitbox.forEachAlive((button) ->
+		mobileManager.hitbox.visible = true;
+		mobileManager.hitbox.forEachAlive((button) ->
 		{
 			if (getMobilePadButton("buttonP") != null)
 				button.deadZones.push(getMobilePadButton("buttonP"));
@@ -1743,7 +1743,7 @@ class PlayState extends MusicBeatState
 		if (gameAndCharsEvent("onSongEnd", new CancellableEvent()).cancelled) return;
 		endingSong = true;
 		canPause = false;
-		hitbox.visible = false;
+		mobileManager.hitbox.visible = false;
 
 		for (strumLine in strumLines.members) strumLine.vocals.stop();
 		inst.stop();
@@ -1777,7 +1777,7 @@ class PlayState extends MusicBeatState
 	 * Immediately switches to the next song, or goes back to the Story/Freeplay menu.
 	 */
 	public function nextSong() {
-		hitbox.visible = false;
+		mobileManager.hitbox.visible = false;
 		if (isStoryMode) {
 			campaignScore += songScore;
 			campaignMisses += misses;
