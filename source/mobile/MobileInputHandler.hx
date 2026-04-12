@@ -48,6 +48,32 @@ class MobileInputHandler extends FlxTypedSpriteGroup<MobileButton>
 	public function justReleased(button:Dynamic):Bool
 		return checkButtonsState((Std.isOfType(button, Array) ? button : [button]), JUST_RELEASED);
 
+	public function anyPressed():Bool
+		return checkAnyButtonsState(PRESSED);
+
+	public function anyJustPressed():Bool
+		return checkAnyButtonsState(JUST_PRESSED);
+
+	public function anyReleased():Bool
+		return checkAnyButtonsState(RELEASED);
+
+	public function anyJustReleased():Bool
+		return checkAnyButtonsState(JUST_RELEASED);
+
+	public function checkAnyButtonsState(state:ButtonsStates = JUST_PRESSED):Bool
+	{
+		for (button in trackedButtons) {
+			if (state == RELEASED && button.released ||
+			   state == JUST_RELEASED && button.justReleased ||
+			   state == PRESSED && button.pressed ||
+			   state == JUST_PRESSED && button.justPressed)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function checkButtonsState(Buttons:Array<String>, state:ButtonsStates = JUST_PRESSED):Bool
 	{
 		if (Buttons == null)

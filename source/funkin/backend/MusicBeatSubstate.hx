@@ -207,6 +207,8 @@ class MusicBeatSubstate extends FlxSubState implements IBeatCancellableReceiver
 
 	override function create()
 	{
+		instance = this;
+		controls.isInSubstate = true;
 		loadScript();
 		super.create();
 		call("create");
