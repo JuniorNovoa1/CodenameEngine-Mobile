@@ -27,7 +27,7 @@ class UIFileExplorer extends UISliceSprite {
 		uploadButton = new UIButton(x + 8, y+ 8, null, function () {
 			var fileDialog = new FileDialog();
 
-			#if linux
+			#if ios
             fileDialog.onOpen.add(res -> {
                 loadBytes(cast(res, Bytes));
             });
