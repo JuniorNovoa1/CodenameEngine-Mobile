@@ -12,7 +12,7 @@ class MobileOptions extends TreeMenuScreen
 		add(new NumOption(getNameID('extraButtons'), getDescID('extraButtons'), 0, 4, 1, 'extraButtons'));
 		add(new ArrayOption(getNameID('hitboxType'), getDescID('hitboxType'), ["No Gradient", "No Gradient (Old)", "Gradient"],
 			["No Gradient", "No Gradient (Old)", "Gradient"], 'hitboxType'));
-		add(new ArrayOption(getNameID('hitboxMode'), getDescID('hitboxMode'), ["Normal (New)"], ["Normal (New)"], 'hitboxMode'));
+		add(new ArrayOption(getNameID('hitboxMode'), getDescID('hitboxMode'), ["Normal"], ["Normal"], 'hitboxMode'));
 		add(new Checkbox(getNameID('hitboxPos'), getDescID('hitboxPos'), "hitboxPos"));
 		add(new NumOption(getNameID('controlsAlpha'), getDescID('controlsAlpha'), 0.0, 1.0, 0.1, "controlsAlpha", (alpha:Float) ->
 		{
