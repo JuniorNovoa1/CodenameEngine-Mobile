@@ -55,6 +55,9 @@
 
 	<!-- _________________________________ Engine Settings _______________________________ -->
 
+	<!-- This is better thsn using #if mobile shit cuz this useful for multi port supported mods -->
+	<define name="ARKOSE_PORT"/>
+
 	<!-- Comment this out to disable updates !-->
 	<define name="UPDATE_CHECKING" unless="web || hl || neko || debug || mobile"/>
 

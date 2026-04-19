@@ -1,7 +1,6 @@
 name: Linux Builds
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:

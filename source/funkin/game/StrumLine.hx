@@ -410,6 +410,11 @@ class StrumLine extends FlxTypedGroup<Strum> {
 			babyArrow.animation.addByPrefix('static', 'arrow${event.animPrefix.toUpperCase()}');
 			babyArrow.animation.addByPrefix('pressed', '${event.animPrefix} press', 24, false);
 			babyArrow.animation.addByPrefix('confirm', '${event.animPrefix} confirm', 24, false);
+			#if linux
+			if (event.animPrefix == "right") {
+				babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
+			}
+			#end
 		}
 
 		babyArrow.cpu = cpu;

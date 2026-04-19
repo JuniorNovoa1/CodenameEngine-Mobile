@@ -1,7 +1,6 @@
 name: Mac OS Builds
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
