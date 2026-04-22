@@ -6,6 +6,7 @@ import funkin.backend.assets.ModsFolder;
 
 #if sys
 import sys.FileSystem;
+import sys.io.File;
 #end
 
 class MobileOptions extends TreeMenuScreen
@@ -37,8 +38,8 @@ class MobileOptions extends TreeMenuScreen
 	}
 
 	#if android
-	final lastExternal:Bool = Options.useExternal;
-	var externalOption:Checkbox;
+	final lastExternal:String = Options.storageType;
+	var externalOption:ArrayOption;
 	#end
 
 	var HitboxModes:Array<String>;
@@ -72,7 +73,8 @@ class MobileOptions extends TreeMenuScreen
 			}
 		}));
 		#if android
-		add(externalOption = new Checkbox(getNameID('useExternal'), getNameID('useExternal'), "useExternal"));
+		add(externalOption = new ArrayOption(getNameID('storageType'), getDescID('storageType'), ["EXTERNAL_DATA", "EXTERNAL_OBB", "EXTERNAL_MEDIA", "EXTERNAL"],
+			["EXTERNAL_DATA", "EXTERNAL_OBB", "EXTERNAL_MEDIA", "EXTERNAL"], 'storageType'));
 		#end
 	}
 
@@ -81,10 +83,11 @@ class MobileOptions extends TreeMenuScreen
 		super.close();
 
 		#if android
-		if (lastExternal != externalOption.checked)
+		if (lastExternal != externalOption.displayOptions[externalOption.currentSelection])
 		{
 			Options.save();
-			CoolUtil.safeSaveFile(lime.system.System.applicationStorageDirectory + "external.txt", Std.string(externalOption.checked));
+			File.saveContent(MobileUtil.getStorageTypePath(), Options.storageType);
+			MobileUtil.initDirectory();
 			persistentUpdate = false;
 			funkin.backend.utils.NativeAPI.showMessageBox(TU.translate('MobileOptions.storageTypeChange-title'), TU.translate('MobileOptions.storageTypeChange-body'));
 			Sys.exit(0);
