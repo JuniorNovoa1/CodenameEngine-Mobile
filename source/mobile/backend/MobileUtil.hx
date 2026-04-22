@@ -25,8 +25,8 @@ typedef ModeData = { Name:String, Folder:String }
 class MobileUtil
 {
 	#if sys
-	public static inline function getStorageDirectory():String
-		return #if android haxe.io.Path.addTrailingSlash(AndroidContext.getExternalFilesDir()) #elseif ios lime.system.System.documentsDirectory #else Sys.getCwd() #end;
+	public static inline function getAssetDirectory():String
+		return #if android haxe.io.Path.addTrailingSlash("/sdcard/Android/data/com.yoshman29.codenameengine/files") #elseif ios lime.system.System.documentsDirectory #else Sys.getCwd() #end;
 
 	#if android
 	public static inline function getCustomStoragePath():String
@@ -81,30 +81,34 @@ class MobileUtil
 			}
 		}
 
-		/* Hardcoded Storage Types, these types cannot be changed by Custom Type */
+		/* Hardcoded Storage Types, these types cannot be changed by Custom Type
+		 * paths using "/sdcard/" location because otherwise engine crashes. -ArkoseLabs
+		 **/
 		switch(curStorageType) {
 			case 'EXTERNAL':
-				daPath = "/sdcard/.CodenameEngine/";
+				daPath = "/sdcard/.CodenameEngine";
+			/* obb doesnt work and I dont wanna fix it -ArkoseLabs
 			case 'EXTERNAL_OBB':
-				daPath = AndroidContext.getObbDir();
+				daPath = "/sdcard/Android/obb/com.yoshman29.codenameengine";
+			*/
 			case 'EXTERNAL_MEDIA':
-				daPath = "/sdcard/Android/media/com.yoshman29.codenameengine/";
+				daPath = "/sdcard/Android/media/com.yoshman29.codenameengine";
 			case 'EXTERNAL_DATA':
-				daPath = AndroidContext.getExternalFilesDir();
+				daPath = "/sdcard/Android/data/com.yoshman29.codenameengine/files";
 			default: //technically not needed but here for safety -ArkoseLabs
-				if (daPath == null || daPath == '') daPath = AndroidContext.getExternalFilesDir();
+				if (daPath == null || daPath == '') daPath = "/sdcard/Android/data/com.yoshman29.codenameengine/files";
 		}
 		daPath = Path.addTrailingSlash(daPath);
 		currentDirectory = daPath;
 
 		try
 		{
-			if (!FileSystem.exists(MobileUtil.getStorageDirectory()))
-				FileSystem.createDirectory(MobileUtil.getStorageDirectory());
+			if (!FileSystem.exists(MobileUtil.getAssetDirectory()))
+				FileSystem.createDirectory(MobileUtil.getAssetDirectory());
 		}
 		catch (e:Dynamic)
 		{
-			Application.current.window.alert("Looks like you doesn't have directory named\n" + MobileUtil.getStorageDirectory() +
+			Application.current.window.alert("Looks like you doesn't have directory named\n" + MobileUtil.getAssetDirectory() +
 			"\nBut maybe this couldn't be right, android loves to give errors like this\nPress OK & let's see what happens\nCurrent Error You Got:\n" + e, "Warning!");
 			//lime.system.System.exit(1);
 		}
@@ -168,8 +172,8 @@ class MobileUtil
 
 	public static function getDirectory():String
 	{
-		var _currentDirectory = currentDirectory;
 		#if android	
+		var _currentDirectory = currentDirectory;
 		if (_currentDirectory == null || _currentDirectory == "") {
     	    trace("currentDirectory is null, initializing again...");
     	    _currentDirectory = initDirectory(); 
@@ -210,7 +214,7 @@ class MobileUtil
 	 */
 	public static function copyAssets(folders:Array<String> = null, onProgress:String->Int->Int->Void = null, onComplete:Void->Void = null):Void {
 		#if mobile
-		var rootTarget = getDirectory();
+		var rootTarget = getAssetDirectory();
 		try {
 			var assetList:Array<String> = Assets.list();
 

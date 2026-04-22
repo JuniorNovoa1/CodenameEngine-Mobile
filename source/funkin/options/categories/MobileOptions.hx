@@ -38,6 +38,8 @@ class MobileOptions extends TreeMenuScreen
 	}
 
 	#if android
+	var storageTypes:Array<String> = ["EXTERNAL_DATA", "EXTERNAL_MEDIA", "EXTERNAL"];
+	var customPaths:Array<String> = MobileUtil.getCustomStorageDirectories(false);
 	final lastExternal:String = Options.storageType;
 	var externalOption:ArrayOption;
 	#end
@@ -46,6 +48,9 @@ class MobileOptions extends TreeMenuScreen
 	public function new()
 	{
 		super('optionsTree.mobile-name', 'optionsTree.mobile-name', 'MobileOptions.', ['LEFT_FULL', 'A_B']);
+		#if android
+		storageTypes = storageTypes.concat(customPaths); //Get Custom Paths From File
+		#end
 
 		HitboxModes = mergeAllTextsNamed("assets/mobile/Hitbox/HitboxModes/hitboxModeList.txt");
 		if ((HitboxModes == null))
@@ -73,8 +78,8 @@ class MobileOptions extends TreeMenuScreen
 			}
 		}));
 		#if android
-		add(externalOption = new ArrayOption(getNameID('storageType'), getDescID('storageType'), ["EXTERNAL_DATA", "EXTERNAL_OBB", "EXTERNAL_MEDIA", "EXTERNAL"],
-			["EXTERNAL_DATA", "EXTERNAL_OBB", "EXTERNAL_MEDIA", "EXTERNAL"], 'storageType'));
+		add(externalOption = new ArrayOption(getNameID('storageType'), getDescID('storageType'), storageTypes,
+			storageTypes, 'storageType'));
 		#end
 	}
 
@@ -90,7 +95,7 @@ class MobileOptions extends TreeMenuScreen
 			MobileUtil.initDirectory();
 			persistentUpdate = false;
 			funkin.backend.utils.NativeAPI.showMessageBox(TU.translate('MobileOptions.storageTypeChange-title'), TU.translate('MobileOptions.storageTypeChange-body'));
-			Sys.exit(0);
+			LimeSystem.exit(1);
 		}
 		#end
 	}

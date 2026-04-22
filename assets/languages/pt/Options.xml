@@ -121,11 +121,11 @@
 		<str id="hitboxPos-name">Posição do Hitbox</str>
 		<str id="hitboxPos-desc">Se marcado, o hitbox será colocado no topo da tela, caso contrário permanecerá na parte inferior.</str>
 
-		<str id="useExternal-name">Usar Pasta EXTERNA</str>
-		<str id="useExternal-desc">Se marcado, a Engine vai usar .CodenameEngine para a pasta de mods e addons.</str>
+		<str id="storageType-name">Pasta</str>
+		<str id="storageType-desc">Em qual pasta os Mods do Codename Engine devem ser armazenados?\nPastas personalizadas podem ser adicionadas, verifique android/data para isso</str>
 
-		<str id="storageTypeChange-title">Aviso: Tipo De Armazenamento Foi Mudado!</str>
-		<str id="storageTypeChange-body">O Tipo de Armazenamento Mudou.\nUm restart é necessário para que está ação tenha efeito.\nQualquer mod instalado antes terão que ser movidos manualmente para a nova pasta do Tipo de Armazenamento após esse restart.\n\nPressione OK para resetar o jogo e aplicar as mudanças.</str>
+		<str id="storageTypeChange-title">Aviso: O tipo de armazenamento foi alterado!</str>
+		<str id="storageTypeChange-body">O tipo de armazenamento foi alterado.\nÉ necessário reiniciar para que esta alteração entre em vigor.\nQuaisquer mods instalados anteriormente deverão ser movidos manualmente para o diretório do novo tipo de armazenamento após o reinício.\n\nPressione OK para reiniciar o jogo e aplicar as alterações.</str>
 	</group>
 
 	<group name="GameplayOptions" prefix="GameplayOptions.">
